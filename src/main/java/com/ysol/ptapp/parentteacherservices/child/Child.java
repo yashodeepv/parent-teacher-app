@@ -1,5 +1,6 @@
-package com.ysol.ptapp.parentteacherservices.jpa.domain;
+package com.ysol.ptapp.parentteacherservices.child;
 
+import com.ysol.ptapp.parentteacherservices.parent.Parent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

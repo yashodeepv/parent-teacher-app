@@ -1,4 +1,4 @@
-package com.ysol.ptapp.parentteacherservices.jpa.domain;
+package com.ysol.ptapp.parentteacherservices.user;
 
 import com.ysol.ptapp.parentteacherservices.entity.UserType;
 import lombok.AllArgsConstructor;

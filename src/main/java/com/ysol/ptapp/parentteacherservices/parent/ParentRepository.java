@@ -1,6 +1,6 @@
-package com.ysol.ptapp.parentteacherservices.jpa;
+package com.ysol.ptapp.parentteacherservices.parent;
 
-import com.ysol.ptapp.parentteacherservices.jpa.domain.Parent;
+import com.ysol.ptapp.parentteacherservices.parent.Parent;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
