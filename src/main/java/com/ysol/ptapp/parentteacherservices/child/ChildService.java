@@ -1,19 +1,31 @@
 package com.ysol.ptapp.parentteacherservices.child;
 
+import com.ysol.ptapp.parentteacherservices.course.ChildHomeworkStatus;
+import com.ysol.ptapp.parentteacherservices.course.ChildHomeworkStatusRepository;
+import com.ysol.ptapp.parentteacherservices.course.CourseBatchDetails;
+import com.ysol.ptapp.parentteacherservices.course.CourseBatchDetailsRepository;
+import com.ysol.ptapp.parentteacherservices.exceptions.CourseNotFoundException;
 import com.ysol.ptapp.parentteacherservices.exceptions.UserNotFoundException;
 import com.ysol.ptapp.parentteacherservices.parent.Parent;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ChildService {
 
     private final ChildRepository childRepository;
+    private final ChildHomeworkStatusRepository childHomeworkStatusRepository;
+    private final CourseBatchDetailsRepository courseBatchDetailsRepository;
 
-    public ChildService(ChildRepository childRepository) {
+    public ChildService(ChildRepository childRepository,
+                        ChildHomeworkStatusRepository childHomeworkStatusRepository,
+                        CourseBatchDetailsRepository courseBatchDetailsRepository) {
         this.childRepository = childRepository;
+        this.childHomeworkStatusRepository = childHomeworkStatusRepository;
+        this.courseBatchDetailsRepository = courseBatchDetailsRepository;
     }
 
 
@@ -30,7 +42,7 @@ public class ChildService {
 
     public List<Child> getChildByParent(Parent parent) {
         return childRepository.findByParentId(parent.getId())
-                        .orElse(Collections.emptyList());
+                .orElse(Collections.emptyList());
     }
 
     public boolean deleteChild(Child child) {
@@ -41,7 +53,7 @@ public class ChildService {
                         child.getLastName())
                         .orElseThrow(UserNotFoundException::new);
 
-        if(children.isEmpty()) {
+        if (children.isEmpty()) {
             throw new UserNotFoundException();
         }
 
@@ -49,5 +61,16 @@ public class ChildService {
                 .forEach(childRepository::delete);
 
         return true;
+    }
+
+    public List<ChildHomeworkStatus> getHomeworkStatus(Child child) {
+        List<CourseBatchDetails> courses = courseBatchDetailsRepository.findByChildId(child.getId())
+                .orElseThrow(CourseNotFoundException::new);
+
+        return courses.stream()
+                .map(a -> childHomeworkStatusRepository.findByCourseBatchDetilsId(a.getId())
+                        .orElseThrow(CourseNotFoundException::new))
+                .collect(Collectors.toList());
+
     }
 }

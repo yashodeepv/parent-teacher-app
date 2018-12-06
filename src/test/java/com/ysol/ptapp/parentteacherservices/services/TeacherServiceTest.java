@@ -1,8 +1,10 @@
 package com.ysol.ptapp.parentteacherservices.services;
 
+import com.ysol.ptapp.parentteacherservices.child.Child;
+import com.ysol.ptapp.parentteacherservices.course.*;
 import com.ysol.ptapp.parentteacherservices.entity.UserType;
+import com.ysol.ptapp.parentteacherservices.parent.Parent;
 import com.ysol.ptapp.parentteacherservices.teacher.TeacherRepository;
-import com.ysol.ptapp.parentteacherservices.coursebatch.CourseBatch;
 import com.ysol.ptapp.parentteacherservices.teacher.Teacher;
 import com.ysol.ptapp.parentteacherservices.user.User;
 import com.ysol.ptapp.parentteacherservices.teacher.TeacherMapper;
@@ -33,12 +35,26 @@ public class TeacherServiceTest {
             .lastName("v")
             .build();
 
+    User parentUser = User.builder()
+            .userType(UserType.PARENT)
+            .username("p1")
+            .build();
+
     Teacher teacher = Teacher.builder()
             .id(1l)
             .user(user)
             .build();
 
-    CourseBatch courseBatch = CourseBatch.builder()
+    Parent parent = Parent.builder()
+            .user(parentUser)
+            .build();
+
+    Child child = Child.builder()
+            .firstName("child1")
+            .parent(parent)
+            .build();
+
+    Course course = Course.builder()
             .teacher(teacher)
             .build();
 

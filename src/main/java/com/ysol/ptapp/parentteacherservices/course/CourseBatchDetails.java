@@ -1,4 +1,4 @@
-package com.ysol.ptapp.parentteacherservices.coursebatch;
+package com.ysol.ptapp.parentteacherservices.course;
 
 import com.ysol.ptapp.parentteacherservices.child.Child;
 import lombok.AllArgsConstructor;
@@ -10,26 +10,27 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
-@Table(uniqueConstraints={@UniqueConstraint(columnNames={"child_id", "course_batch_id"})})
-public class ChildAttendance {
+public class CourseBatchDetails {
 
     @GeneratedValue
     @Id
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "child_id", nullable = false)
+    @JoinColumn(name = "child_id")
     private Child child;
-
-    @OneToOne
-    @JoinColumn(name = "course_batch_id", nullable = false)
-    private CourseBatch courseBatch;
 
     @OneToMany
     private List<AttendanceEntry> attendanceEntries;
 
+    @OneToMany
+    private List<ChildHomeworkStatus> homeworkStatuses;
+
+    @OneToOne
+    @JoinColumn(name="course_id")
+    private Course course;
 }

@@ -1,13 +1,11 @@
-package com.ysol.ptapp.parentteacherservices.coursebatch;
+package com.ysol.ptapp.parentteacherservices.course;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -23,5 +21,9 @@ public class AttendanceEntry {
 
     private Date date;
     private boolean present;
+
+    @OneToOne
+    @JoinColumn(name="course_batch_details_id")
+    private CourseBatchDetails courseBatchDetails;
 
 }

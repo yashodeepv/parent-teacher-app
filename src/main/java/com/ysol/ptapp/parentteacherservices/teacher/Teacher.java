@@ -1,6 +1,6 @@
 package com.ysol.ptapp.parentteacherservices.teacher;
 
-import com.ysol.ptapp.parentteacherservices.coursebatch.CourseBatch;
+import com.ysol.ptapp.parentteacherservices.course.Course;
 import com.ysol.ptapp.parentteacherservices.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,5 +25,5 @@ public class Teacher {
     private User user;
 
     @OneToMany
-    private List<CourseBatch> courseBatches;
+    private List<Course> courses;
 }

@@ -1,5 +1,9 @@
 package com.ysol.ptapp.parentteacherservices;
 
+import com.ysol.ptapp.parentteacherservices.course.ChildHomeworkRepository;
+import com.ysol.ptapp.parentteacherservices.course.ChildHomeworkStatusRepository;
+import com.ysol.ptapp.parentteacherservices.course.CourseBatchDetailsRepository;
+import com.ysol.ptapp.parentteacherservices.course.CourseRepository;
 import com.ysol.ptapp.parentteacherservices.entity.UserType;
 import com.ysol.ptapp.parentteacherservices.child.ChildRepository;
 import com.ysol.ptapp.parentteacherservices.parent.ParentRepository;
@@ -15,7 +19,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 @SpringBootApplication
@@ -28,7 +31,16 @@ public class ParentTeacherServicesApplication {
 
 
     @Bean
-    public CommandLineRunner cml(UserRepository userRepository, ParentRepository parentRepository, ChildRepository childRepository, ParentService parentService, UserService userService) {
+    public CommandLineRunner cml(UserRepository userRepository,
+                                 ParentRepository parentRepository,
+                                 ChildRepository childRepository,
+                                 CourseRepository courseRepository,
+                                 CourseBatchDetailsRepository courseBatchDetailsRepository,
+                                 ChildHomeworkRepository childHomeworkRepository,
+                                 ChildHomeworkStatusRepository childHomeworkStatusRepository,
+
+                                 ParentService parentService,
+                                 UserService userService) {
         return b -> {
             Stream.of("yash:123", "rash:123")
                     .map(a -> a.split(":"))

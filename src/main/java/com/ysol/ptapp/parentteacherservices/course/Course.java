@@ -1,4 +1,4 @@
-package com.ysol.ptapp.parentteacherservices.coursebatch;
+package com.ysol.ptapp.parentteacherservices.course;
 
 import com.ysol.ptapp.parentteacherservices.teacher.Teacher;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CourseBatch {
+public class Course {
 
     @GeneratedValue
     @Id
@@ -25,11 +25,8 @@ public class CourseBatch {
     private Teacher teacher;
 
     @OneToMany
-    private List<ChildCourseBatch> childrenCourseBatch;
+    private List<CourseBatchDetails> children;
 
     @OneToMany
-    private List<ChildAttendance> childAttendances;
-
-    @OneToMany
-    private List<ChildHomework> childHomework;
+    private List<Homework> homeworks;
 }
